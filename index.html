@@ -5,16 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBIS | Physical Interface for GenAI in Classrooms</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #f9f9f7;
-            --bg-card: #ffffff;
-            --primary-orange: #d66e38;
-            --orange-glow: rgba(214, 110, 56, 0.2);
-            --text-main: #2c2c2c;
-            --text-muted: #6b6b6b;
-            --gradient-orange: linear-gradient(135deg, #e88655 0%, #c45b25 100%);
+            --bg-dark: #120d0a;
+            --bg-card: #1c1511;
+            --primary-orange: #ff6b00;
+            --primary-orange-light: #ff8c33;
+            --orange-glow: rgba(255, 107, 0, 0.4);
+            --text-main: #fcfcfc;
+            --text-muted: #b3b3b3;
+            --gradient-orange: linear-gradient(135deg, #ff8c33 0%, #ff5500 100%);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -29,6 +32,35 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Ambient Background Glows */
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.5;
+            top: -200px;
+            right: -200px;
+            animation: pulseGlow 8s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 0.6;
+            }
         }
 
         /* Navigation */
@@ -40,13 +72,18 @@
             position: absolute;
             width: 100%;
             top: 0;
-            z-index: 10;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
         }
 
         .logo {
-            font-weight: 800;
-            font-size: 1.5rem;
+            font-weight: 900;
+            font-size: 2rem;
             letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
         }
 
         .logo span {
@@ -57,139 +94,106 @@
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            text-align: center;
             padding: 6rem 5% 0 5%;
-            background: radial-gradient(circle at top left, #ffffff 0%, var(--bg-dark) 80%);
-            gap: 2rem;
+            position: relative;
+            /* Parallax Background */
+            background-image:
+                linear-gradient(to bottom, rgba(255, 107, 0, 0.4) 0%, rgba(18, 13, 10, 1) 100%),
+                url('Fotos/GroupPic_reworked.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .hero-text {
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 24px;
-            transform: scale(1.05);
-            transition: transform 0.5s ease;
-        }
-        
-        .hero-image img:hover {
-            transform: scale(1.08) translateY(-10px);
-        }
-        
-        /* Add a soft glow behind the hero image */
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            background: var(--orange-glow);
-            filter: blur(80px);
-            z-index: -1;
-            border-radius: 50%;
+            max-width: 900px;
+            z-index: 10;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -2px;
             margin-bottom: 1.5rem;
-            color: #1a1a1a;
+            color: #ffffff;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .hero h1 span {
             background: var(--gradient-orange);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: none;
         }
 
         .hero p {
-            font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-            color: var(--text-muted);
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            color: #eeeeee;
             margin-bottom: 2rem;
-            max-width: 500px;
+            font-weight: 300;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Users Section: Students & Teachers */
-        .users-section {
-            padding: 6rem 5%;
-            background-color: var(--bg-card);
-            position: relative;
-        }
-
-        .users-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .user-card {
-            background: var(--bg-dark);
-            padding: 3rem;
-            border-radius: 24px;
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .user-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
-            border-color: rgba(214, 110, 56, 0.3);
-        }
-        
-        .user-card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            background: #fff;
-            border-radius: 16px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .user-card h3 {
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--primary-orange);
             font-size: 2rem;
-            color: var(--text-main);
         }
 
-        .user-card p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.7;
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0) translateX(-50%);
+            }
+
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Handmade Hard & Software */
         .hardware {
-            background: linear-gradient(180deg, var(--bg-card) 0%, #f4f4f0 100%);
             padding: 8rem 5%;
-            border-top: 1px solid rgba(214, 110, 56, 0.1);
+            background-color: var(--bg-dark);
+            position: relative;
+            z-index: 2;
         }
-        
+
         .hardware-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 4rem;
+            gap: 5rem;
             flex-wrap: wrap;
         }
 
@@ -197,34 +201,57 @@
             flex: 1;
             min-width: 300px;
         }
-        
+
         .hardware-image {
             flex: 1;
             min-width: 300px;
             text-align: center;
             position: relative;
+            perspective: 1000px;
+            /* For 3D effect */
         }
-        
-        .hardware-image img {
+
+        .tilt-image {
             max-width: 100%;
             height: auto;
             border-radius: 20px;
-            transition: transform 0.4s ease;
+            box-shadow: 0 25px 50px rgba(255, 107, 0, 0.15);
+            transition: transform 0.1s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
-        .hardware-image img:hover {
-            transform: scale(1.02);
+        /* Floating effect for image */
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .hardware h2 {
-            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1.5rem;
             font-weight: 800;
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hardware p {
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 2.5rem;
             line-height: 1.8;
         }
@@ -236,120 +263,230 @@
         }
 
         .spec-pill {
-            background: rgba(214, 110, 56, 0.1);
-            color: var(--primary-orange);
+            background: var(--glass-bg);
+            color: #fff;
             padding: 0.8rem 1.5rem;
             border-radius: 50px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
-            border: 1px solid rgba(214, 110, 56, 0.2);
-            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-        
+
+        .spec-pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-orange);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .spec-pill:hover::before {
+            left: 0;
+        }
+
         .spec-pill:hover {
-            background: var(--primary-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--orange-glow);
+            border-color: transparent;
+        }
+
+        /* Users Section: Students & Teachers */
+        .users-section {
+            padding: 8rem 5%;
+            background-color: #0a0705;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .users-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-orange), transparent);
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+        }
+
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .user-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 4rem 3rem;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-orange);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .user-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 107, 0, 0.1);
+            border-color: rgba(255, 107, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .user-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .user-card img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            background: var(--gradient-orange);
+            border-radius: 24px;
+            padding: 15px;
+            box-shadow: 0 10px 25px var(--orange-glow);
+            margin-bottom: 1rem;
+        }
+
+        .user-card h3 {
+            font-size: 2.5rem;
             color: #fff;
-            transform: translateY(-2px);
+            font-weight: 800;
+        }
+
+        .user-card p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.8;
         }
 
         /* Digital Goody */
         .goody-section {
-            padding: 6rem 5%;
+            padding: 8rem 5%;
             text-align: center;
-            background-color: var(--bg-card);
+            background: linear-gradient(135deg, var(--primary-orange) 0%, #c43800 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Diagonal stripes background for goody */
+        .goody-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(0, 0, 0, 0.05) 20px,
+                    rgba(0, 0, 0, 0.05) 40px);
+            pointer-events: none;
         }
 
         .goody-content {
             max-width: 600px;
             margin: 0 auto;
-            background: var(--bg-dark);
-            padding: 3rem;
-            border-radius: 24px;
-            border: 1px solid rgba(214, 110, 56, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            padding: 4rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
         }
 
         .goody-content h2 {
-            font-size: 2rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--primary-orange);
+            color: #fff;
+            font-weight: 900;
         }
 
         .goody-content p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
         }
 
         .goody-image-preview {
             width: 100%;
             max-width: 250px;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .goody-image-preview:hover {
-            transform: scale(1.05);
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .btn-outline {
-            background-color: transparent;
+        .goody-image-preview:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .btn-solid {
+            background-color: #fff;
             color: var(--primary-orange);
-            border: 2px solid var(--primary-orange);
-            padding: 0.8rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 800;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
             display: inline-block;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .btn-outline:hover {
-            background-color: var(--primary-orange);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--orange-glow);
+        .btn-solid:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background-color: #f0f0f0;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 3rem 5%;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            background-color: #ebebeb;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1rem;
+            background-color: #050403;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-up {
-            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-        }
-        
         @media (max-width: 900px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 8rem;
-            }
-            .hero-text {
-                margin: 0 auto;
-            }
             .hardware-container {
-                flex-direction: column;
+                flex-direction: column-reverse;
                 text-align: center;
             }
+
             .spec-list {
                 justify-content: center;
             }
@@ -359,41 +496,25 @@
 
 <body>
 
+    <div class="ambient-glow"></div>
+
     <nav>
         <div class="logo">IBIS<span>.</span></div>
     </nav>
 
     <header class="hero">
-        <div class="hero-text">
-            <h1 class="animate-up">Meet <span>IBIS</span></h1>
-            <p class="animate-up" style="animation-delay: 0.2s;">
-                A physical interface for GenAI in classrooms. 
+        <div class="hero-text reveal active">
+            <h1>Meet <span>IBIS</span></h1>
+            <p>
+                A voice-only, physical interface for GenAI in classrooms.
             </p>
         </div>
-        <div class="hero-image animate-up" style="animation-delay: 0.4s;">
-            <img src="Fotos/GroupPic_reworked_transparent.png" alt="IBIS Group Image">
-        </div>
+        <div class="scroll-indicator">↓</div>
     </header>
-
-    <section class="users-section">
-        <div class="users-grid">
-            <div class="user-card animate-up" style="animation-delay: 0.2s;">
-                <img src="Fotos/Pictogram_transparent.png" alt="Student Icon">
-                <h3>For Students</h3>
-                <p>Students gain distraction-less interaction with GenAI, focusing purely on learning without the typical screen-based interruptions.</p>
-            </div>
-            
-            <div class="user-card animate-up" style="animation-delay: 0.4s;">
-                <img src="Fotos/Pictogram.png" alt="Teacher Icon">
-                <h3>For Teachers</h3>
-                <p>Teachers gain insight into student learning via a comprehensive dashboard and diagnostics, featuring frequently asked questions and a summary of the main problems the class is facing.</p>
-            </div>
-        </div>
-    </section>
 
     <section class="hardware">
         <div class="hardware-container">
-            <div class="hardware-content animate-up">
+            <div class="hardware-content reveal">
                 <h2>Handmade Hard & Software</h2>
                 <p>
                     IBIS doesn't just live in the cloud—it exists physically in the learning space. Housed in a
@@ -407,19 +528,39 @@
                     <span class="spec-pill">RAG support</span>
                 </div>
             </div>
-            <div class="hardware-image animate-up" style="animation-delay: 0.2s;">
-                <img src="Fotos/Sideview_Transparent.png" alt="IBIS Sideview">
+            <div class="hardware-image reveal">
+                <div class="float-anim">
+                    <img src="Fotos/Sideview_Transparent.png" alt="IBIS Sideview" class="tilt-image" id="tiltImg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="users-section">
+        <div class="users-grid">
+            <div class="user-card reveal" style="transition-delay: 0.1s;">
+                <img src="Fotos/Pictogram_transparent.png" alt="Student Icon">
+                <h3>For Students</h3>
+                <p>Students gain distraction-less interaction with GenAI, focusing purely on learning without the
+                    typical screen-based interruptions.</p>
+            </div>
+
+            <div class="user-card reveal" style="transition-delay: 0.3s;">
+                <img src="Fotos/Pictogram.png" alt="Teacher Icon">
+                <h3>For Teachers</h3>
+                <p>Teachers gain insight into student learning via a comprehensive dashboard and diagnostics, featuring
+                    frequently asked questions and a summary of the main problems the class is facing.</p>
             </div>
         </div>
     </section>
 
     <section class="goody-section">
-        <div class="goody-content animate-up">
+        <div class="goody-content reveal">
             <h2>Digital Goody 🎁</h2>
             <p>Download our official IBIS background to show your support.</p>
             <img src="Fotos/Group_Pictogram.png" alt="IBIS Group Pictogram" class="goody-image-preview">
             <br>
-            <a href="Fotos/Group_Pictogram.png" download class="btn-outline">Download Background</a>
+            <a href="Fotos/Group_Pictogram.png" download class="btn-solid">Download Background</a>
         </div>
     </section>
 
@@ -427,6 +568,57 @@
         <p>&copy; 2026 IBIS Project. Pioneering Educational Technology.</p>
     </footer>
 
+    <script>
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+
+        revealElements.forEach(el => {
+            if (!el.classList.contains('active')) {
+                revealObserver.observe(el);
+            }
+        });
+
+        // 3D Tilt Effect on Hardware Image
+        const tiltImg = document.getElementById('tiltImg');
+        const hardwareSection = document.querySelector('.hardware-image');
+
+        if (hardwareSection && tiltImg) {
+            hardwareSection.addEventListener('mousemove', (e) => {
+                const rect = hardwareSection.getBoundingClientRect();
+                const x = e.clientX - rect.left; // x position within the element.
+                const y = e.clientY - rect.top;  // y position within the element.
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -15; // Max 15deg
+                const rotateY = ((x - centerX) / centerX) * 15;
+
+                tiltImg.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            hardwareSection.addEventListener('mouseleave', () => {
+                tiltImg.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            });
+        }
+    </script>
 </body>
 
 </html>
