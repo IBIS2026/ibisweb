@@ -56,6 +56,36 @@
             color: var(--primary-orange);
         }
 
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-orange);
+            border-color: var(--primary-orange);
+            color: #fff;
+            box-shadow: 0 5px 15px var(--orange-glow);
+        }
+
+        .slogan {
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            letter-spacing: 4px;
+            font-weight: 800;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -395,10 +425,12 @@
 
     <nav>
         <div class="logo">IBIS<span>.</span></div>
+        <button id="contactBtn" class="btn-outline">Contact</button>
     </nav>
 
     <header class="hero">
         <div class="hero-text reveal active">
+            <div class="slogan">Talk. Adapt. Learn.</div>
             <h1>Meet <span>IBIS</span></h1>
             <p>
                 A voice-only, physical Interface for GenAI in Classrooms.
@@ -410,20 +442,21 @@
     <section class="hardware">
         <div class="hardware-container">
             <div class="hardware-content reveal">
-                <h2>Handmade Hard & Software</h2>
+                <h2>Handmade Hard &amp; Software</h2>
                 <p>
                     IBIS doesn't just live in the cloud—it exists physically in the learning space. Housed in a
-                    custom-designed orange chassis, the units provide a tangible, approachable presence. Designed to address the Problems of AI Integration in Schools.
+                    custom-designed orange chassis, the units provide a tangible, approachable presence. Designed to
+                    address the Problems of AI Integration in Schools.
                 </p>
 
-                    <div class="spec-list">
-                        <span class="spec-pill">Built on Raspberry Pi</span>
-                        <span class="spec-pill">Voice-First Interaction</span>
-                        <span class="spec-pill">Vision & Tool Calling for Advanced Use Cases</span>
-                        <span class="spec-pill">Privately Hosted LLM on Our Servers</span>
-                        <span class="spec-pill">Customizable Knowledge</span>
-                        <span class="spec-pill">Designed for Classroom Education</span>
-                    </div>
+                <div class="spec-list">
+                    <span class="spec-pill">Built on Raspberry Pi</span>
+                    <span class="spec-pill">Voice-First Interaction</span>
+                    <span class="spec-pill">Vision &amp; Tool Calling for Advanced Use Cases</span>
+                    <span class="spec-pill">Privately Hosted LLM on Our Servers</span>
+                    <span class="spec-pill">Customizable Knowledge</span>
+                    <span class="spec-pill">Designed for Classroom Education</span>
+                </div>
             </div>
             <div class="hardware-image reveal">
                 <img src="Fotos/GroupPic_reworked.png" alt="IBIS Device">
@@ -487,6 +520,21 @@
                 revealObserver.observe(el);
             }
         });
+
+        // Contact Button Logic (Bot Safe)
+        const contactBtn = document.getElementById('contactBtn');
+        if (contactBtn) {
+            contactBtn.addEventListener('click', () => {
+                const user = 'felix.reuth';
+                const domain = 'uni-tuebingen.de';
+                // Reveal email without the '@' symbol
+                contactBtn.textContent = `${user} [at] ${domain}`;
+                contactBtn.style.backgroundColor = 'var(--primary-orange)';
+                contactBtn.style.borderColor = 'var(--primary-orange)';
+                // Reset padding if the email is long to keep it looking nice
+                contactBtn.style.padding = '0.6rem 1.2rem';
+            });
+        }
     </script>
 </body>
 
