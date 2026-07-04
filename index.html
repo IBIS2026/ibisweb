@@ -8,16 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #120d0a;
-            --bg-card: #1c1511;
-            --primary-orange: #ff6b00;
-            --primary-orange-light: #ff8c33;
-            --orange-glow: rgba(255, 107, 0, 0.2);
-            --text-main: #fcfcfc;
-            --text-muted: #b3b3b3;
-            --gradient-orange: linear-gradient(135deg, #ff8c33 0%, #ff5500 100%);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-light: #f9f9f7;
+            --bg-card: #ffffff;
+            --primary-orange: #d66e38;
+            --orange-glow: rgba(214, 110, 56, 0.2);
+            --text-main: #2c2c2c;
+            --text-muted: #6b6b6b;
+            --gradient-orange: linear-gradient(135deg, #e88655 0%, #c45b25 100%);
         }
 
         * {
@@ -28,39 +25,11 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
             scroll-behavior: smooth;
-        }
-
-        /* Ambient Background Glows */
-        .ambient-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.5;
-            top: -200px;
-            right: -200px;
-            animation: pulseGlow 8s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                opacity: 0.4;
-            }
-
-            100% {
-                transform: scale(1.2);
-                opacity: 0.6;
-            }
         }
 
         /* Navigation */
@@ -73,9 +42,6 @@
             width: 100%;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
         }
 
         .logo {
@@ -102,7 +68,7 @@
             position: relative;
             /* Parallax Background */
             background-image:
-                linear-gradient(to bottom, rgba(255, 107, 0, 0.4) 0%, rgba(18, 13, 10, 1) 100%),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%),
                 url('Fotos/GroupPic_reworked.png');
             background-size: cover;
             background-position: center;
@@ -121,7 +87,7 @@
             letter-spacing: -2px;
             margin-bottom: 1.5rem;
             color: #ffffff;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .hero h1 span {
@@ -183,7 +149,7 @@
         /* Handmade Hard & Software */
         .hardware {
             padding: 8rem 5%;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-light);
             position: relative;
             z-index: 2;
         }
@@ -207,37 +173,13 @@
             min-width: 300px;
             text-align: center;
             position: relative;
-            perspective: 1000px;
-            /* For 3D effect */
         }
 
-        .tilt-image {
+        .hardware-image img {
             max-width: 100%;
             height: auto;
             border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(255, 107, 0, 0.15);
-            transition: transform 0.1s ease;
-            transform-style: preserve-3d;
-            will-change: transform;
-        }
-
-        /* Floating effect for image */
-        .float-anim {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         .hardware h2 {
@@ -263,59 +205,34 @@
         }
 
         .spec-pill {
-            background: var(--glass-bg);
-            color: #fff;
+            background: rgba(214, 110, 56, 0.1);
+            color: var(--primary-orange);
             padding: 0.8rem 1.5rem;
             border-radius: 50px;
             font-size: 1rem;
             font-weight: 600;
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(214, 110, 56, 0.2);
             transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
 
-        .spec-pill::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-orange);
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-
-        .spec-pill:hover::before {
-            left: 0;
-        }
-
         .spec-pill:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px var(--orange-glow);
-            border-color: transparent;
+            background: var(--primary-orange);
+            color: #fff;
         }
 
         /* Users Section: Students & Teachers */
         .users-section {
             padding: 8rem 5%;
-            background-color: #0a0705;
+            background-color: var(--bg-card);
             position: relative;
             overflow: hidden;
-        }
-
-        .users-section::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-orange), transparent);
-            top: 0;
-            left: 0;
-            opacity: 0.3;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .users-grid {
@@ -327,18 +244,17 @@
         }
 
         .user-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: #ffffff;
             padding: 4rem 3rem;
             border-radius: 30px;
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
         }
 
         .user-card::after {
@@ -356,9 +272,8 @@
 
         .user-card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 107, 0, 0.1);
-            border-color: rgba(255, 107, 0, 0.3);
-            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: rgba(214, 110, 56, 0.2);
         }
 
         .user-card:hover::after {
@@ -369,16 +284,16 @@
             width: 90px;
             height: 90px;
             object-fit: contain;
-            background: var(--gradient-orange);
+            background: #fff;
             border-radius: 24px;
             padding: 15px;
-            box-shadow: 0 10px 25px var(--orange-glow);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             margin-bottom: 1rem;
         }
 
         .user-card h3 {
             font-size: 2.5rem;
-            color: #fff;
+            color: var(--text-main);
             font-weight: 800;
         }
 
@@ -392,36 +307,19 @@
         .goody-section {
             padding: 8rem 5%;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary-orange) 0%, #c43800 100%);
+            background-color: var(--bg-light);
             position: relative;
             overflow: hidden;
-        }
-
-        /* Diagonal stripes background for goody */
-        .goody-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(45deg,
-                    transparent,
-                    transparent 20px,
-                    rgba(0, 0, 0, 0.05) 20px,
-                    rgba(0, 0, 0, 0.05) 40px);
-            pointer-events: none;
         }
 
         .goody-content {
             max-width: 600px;
             margin: 0 auto;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(20px);
+            background: var(--bg-card);
             padding: 4rem;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(214, 110, 56, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
             position: relative;
             z-index: 2;
         }
@@ -429,12 +327,12 @@
         .goody-content h2 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: #fff;
+            color: var(--primary-orange);
             font-weight: 900;
         }
 
         .goody-content p {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-muted);
             margin-bottom: 2.5rem;
             font-size: 1.2rem;
         }
@@ -444,18 +342,17 @@
             max-width: 250px;
             border-radius: 16px;
             margin-bottom: 2.5rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .goody-image-preview:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.05) rotate(2deg);
         }
 
         .btn-solid {
-            background-color: #fff;
-            color: var(--primary-orange);
+            background-color: var(--primary-orange);
+            color: #fff;
             padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
@@ -463,22 +360,22 @@
             font-size: 1.1rem;
             transition: all 0.3s ease;
             display: inline-block;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px var(--orange-glow);
         }
 
         .btn-solid:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            background-color: #f0f0f0;
+            box-shadow: 0 15px 30px rgba(214, 110, 56, 0.3);
+            background-color: #d66e38;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 3rem 5%;
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--text-muted);
             font-size: 1rem;
-            background-color: #050403;
+            background-color: #ebebeb;
         }
 
         @media (max-width: 900px) {
@@ -495,8 +392,6 @@
 </head>
 
 <body>
-
-    <div class="ambient-glow"></div>
 
     <nav>
         <div class="logo">IBIS<span>.</span></div>
@@ -529,9 +424,7 @@
                 </div>
             </div>
             <div class="hardware-image reveal">
-                <div class="float-anim">
-                    <img src="Fotos/Sideview_Transparent.png" alt="IBIS Sideview" class="tilt-image" id="tiltImg">
-                </div>
+                <img src="Fotos/Single Image.png" alt="IBIS Device">
             </div>
         </div>
     </section>
@@ -546,7 +439,7 @@
             </div>
 
             <div class="user-card reveal" style="transition-delay: 0.3s;">
-                <img src="Fotos/Pictogram.png" alt="Teacher Icon">
+                <img src="Fotos/Pictogram_transparent.png" alt="Teacher Icon">
                 <h3>For Teachers</h3>
                 <p>Teachers gain insight into student learning via a comprehensive dashboard and diagnostics, featuring
                     frequently asked questions and a summary of the main problems the class is facing.</p>
@@ -576,8 +469,6 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // Optional: stop observing once revealed
-                    // observer.unobserve(entry.target);
                 }
             });
         };
@@ -594,30 +485,6 @@
                 revealObserver.observe(el);
             }
         });
-
-        // 3D Tilt Effect on Hardware Image
-        const tiltImg = document.getElementById('tiltImg');
-        const hardwareSection = document.querySelector('.hardware-image');
-
-        if (hardwareSection && tiltImg) {
-            hardwareSection.addEventListener('mousemove', (e) => {
-                const rect = hardwareSection.getBoundingClientRect();
-                const x = e.clientX - rect.left; // x position within the element.
-                const y = e.clientY - rect.top;  // y position within the element.
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = ((y - centerY) / centerY) * -15; // Max 15deg
-                const rotateY = ((x - centerX) / centerX) * 15;
-
-                tiltImg.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            hardwareSection.addEventListener('mouseleave', () => {
-                tiltImg.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-            });
-        }
     </script>
 </body>
 
