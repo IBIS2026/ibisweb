@@ -123,6 +123,7 @@
         .hero h1 span {
             background: var(--gradient-orange);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: none;
         }
@@ -176,162 +177,7 @@
             transform: translateY(0);
         }
 
-        /* Handmade Hard & Software */
-        .hardware {
-            padding: 8rem 5%;
-            background-color: var(--bg-light);
-            position: relative;
-            z-index: 2;
-        }
 
-        .hardware-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 5rem;
-            flex-wrap: wrap;
-        }
-
-        .hardware-content {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .hardware-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hardware-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .hardware h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            background: var(--gradient-orange);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hardware p {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-        }
-
-        .spec-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .spec-pill {
-            background: rgba(214, 110, 56, 0.1);
-            color: var(--primary-orange);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: 1px solid rgba(214, 110, 56, 0.2);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .spec-pill:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px var(--orange-glow);
-            background: var(--primary-orange);
-            color: #fff;
-        }
-
-        /* Users Section: Students & Teachers */
-        .users-section {
-            padding: 8rem 5%;
-            background-color: var(--bg-card);
-            position: relative;
-            overflow: hidden;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .users-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .user-card {
-            background: #ffffff;
-            padding: 4rem 3rem;
-            border-radius: 30px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-        }
-
-        .user-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-orange);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-
-        .user-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            border-color: rgba(214, 110, 56, 0.2);
-        }
-
-        .user-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .user-card img {
-            width: 90px;
-            height: 90px;
-            object-fit: contain;
-            background: #fff;
-            border-radius: 24px;
-            padding: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1rem;
-        }
-
-        .user-card h3 {
-            font-size: 2.5rem;
-            color: var(--text-main);
-            font-weight: 800;
-        }
-
-        .user-card p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
 
         /* Digital Goody */
         .goody-section {
@@ -406,17 +252,6 @@
             color: var(--text-muted);
             font-size: 1rem;
             background-color: #ebebeb;
-        }
-
-        @media (max-width: 900px) {
-            .hardware-container {
-                flex-direction: column-reverse;
-                text-align: center;
-            }
-
-            .spec-list {
-                justify-content: center;
-            }
         }
     </style>
 </head>
